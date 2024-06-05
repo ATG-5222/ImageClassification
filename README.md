@@ -66,13 +66,13 @@ El valor de precision en este modelo es de: 0.47101449275362317, este valor es b
 
 Para mejorar el desempeño del modelo se tuvieron que realizar multiples ajustes en el mismo, empezando por la creación de una carpeta de validación, esta contiene 120 imágenes (60 de cada clase), estas imágenes fueron separadas de la carpeta train, por lo tanto la carpeta train tiene 600 imágenes (300 de cada categoria), la carpeta test tiene 180 imágenes (90 de cada categoria) y validation 120 imágenes (60 de categoria), como se menciono anteriormente.
 
-Adicionalmente se modifico el modelo añadiendo 2 capas adicionales de procesamiento, cada una es una capa convolucional bidimensional (Conv2D) con 512 filtros, cada uno de tamaño 3x3, utilizando la función de activación ReLU y con padding 'same' para mantener el tamaño de la salida igual al de la entrada. A continuación, se incorpora una capa de normalización por lotes (Batch Normalization) para estabilizar y acelerar el proceso de entrenamiento, ajustando y escalando las activaciones de la capa anterior. Finalmente, se añade una capa de Dropout con una tasa del 25%, que desactiva aleatoriamente el 25% de las neuronas durante cada iteración de entrenamiento para prevenir el sobreajuste. Para garantizar que el modelo tuviera el tiempo y los elementos necesarios para llegar a tener el mejor desempeño posible se extendiaron las epocas de entranmiento de 25 a 50.
+Adicionalmente se modifico el modelo añadiendo 2 capas adicionales de procesamiento, cada una es una capa convolucional bidimensional (Conv2D) con 512 filtros, cada uno de tamaño 3x3, utilizando la función de activación ReLU y con padding 'same' para mantener el tamaño de la salida igual al de la entrada. A continuación, se incorpora una capa de normalización por lotes (Batch Normalization) para estabilizar y acelerar el proceso de entrenamiento, ajustando y escalando las activaciones de la capa anterior. Finalmente, se añade una capa de Dropout con una tasa del 25%, que desactiva aleatoriamente el 25% de las neuronas durante cada iteración de entrenamiento para prevenir el sobreajuste. Para garantizar que el modelo tuviera el tiempo y los elementos necesarios para llegar a tener el mejor desempeño posible se extendieron las epocas de entrenamiento de 25 a 50.
 
 Despues de de ejcutar el modelo se obtuvo la siguiente matriz de confusión:
 
 ![1717568920811](image/README/1717568920811.png)
 
-El valor de train accuracy fue de 0.8607 mientras que el test accuracy fue de 0.6888889074325562.
+El valor de train accuracy fue de 0.8607 mientras que el test accuracy fue de 0.6888889074325562. 
 
 A partir de la matriz de confusión se obtuvo un valor de precision de 0.6842105263157895.
 
