@@ -1,6 +1,6 @@
 # ImageClassification
 
-Image Classification (Pizza and Ice cream)
+Image Classification (Pizza and Ice cream) using a CNN.
 
 Aldo Tena García - A01275222
 
@@ -40,3 +40,40 @@ Como se puede ver en las imagenes obtenidas de la primera ejecución del modelo,
 El valor obtenido en test accuracy fue de: 0.7666666507720947, esta marca una diferencia de cerca del 20% entre train y test accuracy por lo que se puede observar un caso de overfitting.
 
 ![1716532887381](image/README/1716532887381.png)![1716532898405](image/README/1716532898405.png)
+
+Para evaluar de forma más decuada el modelo se uso de la matriz de confusión, la matriz de confusión es una tabla que funciona para mostrar los resultados obtenidos por el modelo desarrollado haciendo uso de un simple formato en el que se muestran las predicciones esperadas contra las predicciones realizadas. La tabla contiene los siguientes valores:
+
+* True Positives (TP) o Verdaderos Postivos (VP)
+* True Negatives (TN) o Verdaderos Negativos (VN)
+* False Positives (FP) o Falsos Postivos (FP)
+* False Negatives (FN) o Falsos Negativos (FN)
+
+  ![1717565463383](image/README/1717565463383.png)
+
+La matriz de confusión resultante del modelo es la siguiente:
+
+![1717565569700](image/README/1717565569700.png)
+
+Como se puede observar hay una gran cantidad de desaciertos dentro de la matriz de confusión, se puede inferir que hay el modelo tiene dificultades para clasificar correctamente las imagenes de ambas categorias especialmente pertencientes a la categoria "icecream".
+
+Hay multiples metricas de evaluación que surgen de los valores presentes en la matriz de confusión, para evaluar este modelo se opto por usar "Precision". La formula para obtener el valor de precision del modelo es:
+
+Precision = TP/(TP+FP)
+
+El valor de precision en este modelo es de: 0.47101449275362317, este valor es bajo para que un clasificador binario por lo que necesita pasar por una etapa de refinamiento.
+
+# Refinamiento del modelo
+
+Para mejorar el desempeño del modelo se tuvieron que realizar multiples ajustes en el mismo, empezando por la creación de una carpeta de validación, esta contiene 120 imágenes (60 de cada clase), estas imágenes fueron separadas de la carpeta train, por lo tanto la carpeta train tiene 600 imágenes (300 de cada categoria), la carpeta test tiene 180 imágenes (90 de cada categoria) y validation 120 imágenes (60 de categoria), como se menciono anteriormente.
+
+Adicionalmente se modifico el modelo añadiendo 2 capas adicionales de procesamiento, cada una es una capa convolucional bidimensional (Conv2D) con 512 filtros, cada uno de tamaño 3x3, utilizando la función de activación ReLU y con padding 'same' para mantener el tamaño de la salida igual al de la entrada. A continuación, se incorpora una capa de normalización por lotes (Batch Normalization) para estabilizar y acelerar el proceso de entrenamiento, ajustando y escalando las activaciones de la capa anterior. Finalmente, se añade una capa de Dropout con una tasa del 25%, que desactiva aleatoriamente el 25% de las neuronas durante cada iteración de entrenamiento para prevenir el sobreajuste. Para garantizar que el modelo tuviera el tiempo y los elementos necesarios para llegar a tener el mejor desempeño posible se extendiaron las epocas de entranmiento de 25 a 50.
+
+Despues de de ejcutar el modelo se obtuvo la siguiente matriz de confusión:
+
+![1717568920811](image/README/1717568920811.png)
+
+El valor de train accuracy fue de 0.8607 mientras que el test accuracy fue de 0.6888889074325562.
+
+A partir de la matriz de confusión se obtuvo un valor de precision de 0.6842105263157895.
+
+Despues de pasar por la etapa de refinamiento la metrica de evaluación precisión paso de  0.47101449275362317 a 0.6842105263157895, teniendo una mejora de 0.21 aproximadamente.
